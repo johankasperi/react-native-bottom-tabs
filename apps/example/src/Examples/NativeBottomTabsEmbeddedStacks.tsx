@@ -4,6 +4,9 @@ import { Contacts } from '../Screens/Contacts';
 import { Chat } from '../Screens/Chat';
 import { createNativeBottomTabNavigator } from '@bottom-tabs/react-navigation';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
+import { Button } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const headerOptions = {
   headerShown: true,
@@ -66,39 +69,51 @@ function ChatStackScreen() {
 }
 
 function NativeBottomTabsEmbeddedStacks() {
+  const navigation = useNavigation();
   return (
-    <Tab.Navigator sidebarAdaptable>
-      <Tab.Screen
-        name="Article"
-        component={ArticleStackScreen}
-        options={{
-          tabBarBadge: '10',
-          tabBarIcon: () => require('../../assets/icons/article_dark.png'),
-        }}
+    <SafeAreaView style={{ flex: 1 }} edges={['top']}>
+      <Button
+        onPress={() => navigation.navigate('Modal')}
+        title="Open a modal"
       />
-      <Tab.Screen
-        name="Albums"
-        component={AlbumsStackScreen}
-        options={{
-          tabBarIcon: () => require('../../assets/icons/grid_dark.png'),
-        }}
-      />
-      <Tab.Screen
-        name="Contacts"
-        component={ContactsStackScreen}
-        options={{
-          tabBarIcon: () => require('../../assets/icons/person_dark.png'),
-        }}
-      />
-      <Tab.Screen
-        name="Chat"
-        component={ChatStackScreen}
-        options={{
-          tabBarIcon: () =>
-            require('../../assets/icons/message-circle-code.svg'),
-        }}
-      />
-    </Tab.Navigator>
+      <Tab.Navigator sidebarAdaptable>
+        <Tab.Screen
+          name="Article"
+          component={ArticleStackScreen}
+          options={{
+            tabBarBadge: '10',
+            tabBarIcon: ({ focused }) => {
+              console.log({ focused });
+              return focused
+                ? require('../../assets/icons/article_dark.png')
+                : require('../../assets/icons/grid_dark.png');
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Albums"
+          component={AlbumsStackScreen}
+          options={{
+            tabBarIcon: () => require('../../assets/icons/grid_dark.png'),
+          }}
+        />
+        <Tab.Screen
+          name="Contacts"
+          component={ContactsStackScreen}
+          options={{
+            tabBarIcon: () => require('../../assets/icons/person_dark.png'),
+          }}
+        />
+        <Tab.Screen
+          name="Chat"
+          component={ChatStackScreen}
+          options={{
+            tabBarIcon: () =>
+              require('../../assets/icons/message-circle-code.svg'),
+          }}
+        />
+      </Tab.Navigator>
+    </SafeAreaView>
   );
 }
 
