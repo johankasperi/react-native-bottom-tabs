@@ -30,6 +30,7 @@ import NativeBottomTabsRemoteIcons from './Examples/NativeBottomTabsRemoteIcons'
 import NativeBottomTabsUnmounting from './Examples/NativeBottomTabsUnmounting';
 import NativeBottomTabsCustomTabBar from './Examples/NativeBottomTabsCustomTabBar';
 import NativeBottomTabsFreezeOnBlur from './Examples/NativeBottomTabsFreezeOnBlur';
+import { Modal } from './Screens/Modal';
 
 const FourTabsIgnoreSafeArea = () => {
   return <FourTabs ignoresTopSafeArea />;
@@ -245,6 +246,11 @@ export default function Navigation() {
                 options={example.screenOptions}
               />
             ))}
+          <NavigationStack.Screen
+            name="Modal"
+            component={Modal}
+            options={{ presentation: 'modal' }}
+          />
         </NavigationStack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
