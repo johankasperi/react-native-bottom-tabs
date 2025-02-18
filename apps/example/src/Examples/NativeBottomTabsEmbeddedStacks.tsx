@@ -83,7 +83,6 @@ function NativeBottomTabsEmbeddedStacks() {
           options={{
             tabBarBadge: '10',
             tabBarIcon: ({ focused }) => {
-              console.log({ focused });
               return focused
                 ? require('../../assets/icons/article_dark.png')
                 : require('../../assets/icons/grid_dark.png');
@@ -101,15 +100,20 @@ function NativeBottomTabsEmbeddedStacks() {
           name="Contacts"
           component={ContactsStackScreen}
           options={{
-            tabBarIcon: () => require('../../assets/icons/person_dark.png'),
+            tabBarIcon: ({ focused }) =>
+              focused
+                ? require('../../assets/icons/person_dark.png')
+                : require('../../assets/icons/grid_dark.png'),
           }}
         />
         <Tab.Screen
           name="Chat"
           component={ChatStackScreen}
           options={{
-            tabBarIcon: () =>
-              require('../../assets/icons/message-circle-code.svg'),
+            tabBarIcon: ({ focused }) =>
+              focused
+                ? require('../../assets/icons/message-circle-code.svg')
+                : require('../../assets/icons/grid_dark.png'),
           }}
         />
       </Tab.Navigator>
