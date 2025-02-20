@@ -43,6 +43,11 @@ class RCTTabViewManager(context: ReactApplicationContext) :
 
   }
 
+  override fun onDropViewInstance(view: ReactBottomNavigationView) {
+    super.onDropViewInstance(view)
+    view.shutdownImageLoader()
+  }
+
   override fun getName(): String {
     return tabViewImpl.getName()
   }
